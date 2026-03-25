@@ -1,43 +1,32 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
+
 import { Star, Heart, ShoppingCart, Filter } from "lucide-react";
-=======
 import { Star, Heart, ShoppingCart, Filter } from "lucide-react"; // Filter icon might be useful for a dropdown
->>>>>>> 7c268fc (Initial commit)
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { products, categories } from "@/data/products";
-
-<<<<<<< HEAD
-=======
 // Define a type for sorting options for better type safety
 type SortOption = "default" | "price-asc" | "price-desc" | "rating-desc" | "newest" | "bestseller";
 
->>>>>>> 7c268fc (Initial commit)
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [isVisible, setIsVisible] = useState(false);
   const [likedProducts, setLikedProducts] = useState<Set<number>>(new Set());
   const { addToCart } = useCart();
   const { toast } = useToast();
-<<<<<<< HEAD
-=======
   const [sortOption, setSortOption] = useState<SortOption>("default"); // New state for sorting
->>>>>>> 7c268fc (Initial commit)
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
   const toggleLike = (productId: number) => {
-<<<<<<< HEAD
     setLikedProducts(prev => {
-=======
     setLikedProducts((prev) => {
->>>>>>> 7c268fc (Initial commit)
       const newSet = new Set(prev);
       if (newSet.has(productId)) {
         newSet.delete(productId);
@@ -53,26 +42,21 @@ const Products = () => {
       id: product.id,
       name: product.name,
       price: product.price,
-<<<<<<< HEAD
       image: product.image
     });
     
-=======
       image: product.image,
     });
 
->>>>>>> 7c268fc (Initial commit)
     toast({
       title: "Added to cart!",
       description: `${product.name} has been added to your cart.`,
     });
   };
 
-<<<<<<< HEAD
   const filteredProducts = selectedCategory === "all" 
     ? products 
     : products.filter(product => product.category === selectedCategory);
-=======
   let filteredAndSortedProducts =
     selectedCategory === "all"
       ? [...products] // Create a shallow copy to avoid modifying the original array
@@ -101,14 +85,12 @@ const Products = () => {
       return 0;
     });
   }
->>>>>>> 7c268fc (Initial commit)
 
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Ocean Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-deep-900 via-ocean-800 to-deep-950" />
-<<<<<<< HEAD
         <div 
           className="absolute inset-0 opacity-60"
           style={{
@@ -116,7 +98,6 @@ const Products = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'fixed'
-=======
         <div
           className="absolute inset-0 opacity-60"
           style={{
@@ -124,7 +105,6 @@ const Products = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
->>>>>>> 7c268fc (Initial commit)
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-deep-900/90 via-deep-900/40 to-deep-900/60" />
@@ -133,13 +113,11 @@ const Products = () => {
       {/* Content */}
       <div className="relative z-10">
         <Navbar />
-<<<<<<< HEAD
         
         {/* Page Header */}
         <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto text-center">
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-=======
 
         {/* Page Header */}
         <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
@@ -149,28 +127,22 @@ const Products = () => {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
->>>>>>> 7c268fc (Initial commit)
               <h1 className="text-4xl sm:text-6xl font-playfair font-bold text-white mb-6">
                 Ocean <span className="ocean-text-gradient">Collection</span>
               </h1>
               <p className="text-xl text-blue-200 font-inter max-w-3xl mx-auto">
-<<<<<<< HEAD
                 Discover premium ocean-inspired products crafted for marine enthusiasts and ocean lovers.
-=======
                 Discover premium ocean-inspired products crafted for marine
                 enthusiasts and ocean lovers.
->>>>>>> 7c268fc (Initial commit)
               </p>
             </div>
           </div>
         </div>
 
-<<<<<<< HEAD
         {/* Filters */}
         <div className="px-4 sm:px-6 lg:px-8 mb-8">
           <div className="max-w-7xl mx-auto">
             <div className={`flex flex-wrap gap-4 justify-center mb-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-=======
         {/* Filters and Sorting */}
         <div className="px-4 sm:px-6 lg:px-8 mb-8">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -180,28 +152,22 @@ const Products = () => {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
->>>>>>> 7c268fc (Initial commit)
               {categories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   className={`px-6 py-3 rounded-full font-inter font-medium transition-all duration-300 ${
                     selectedCategory === category.id
-<<<<<<< HEAD
                       ? 'ocean-gradient text-white shadow-lg'
                       : 'glass-dark text-white hover:bg-white/20'
-=======
                       ? "ocean-gradient text-white shadow-lg"
                       : "glass-dark text-white hover:bg-white/20"
->>>>>>> 7c268fc (Initial commit)
                   }`}
                 >
                   {category.name}
                 </button>
               ))}
             </div>
-<<<<<<< HEAD
-=======
 
             {/* Sorting Dropdown */}
             <div
@@ -226,7 +192,6 @@ const Products = () => {
                 <Filter className="h-5 w-5" />
               </div>
             </div>
->>>>>>> 7c268fc (Initial commit)
           </div>
         </div>
 
@@ -234,17 +199,14 @@ const Products = () => {
         <div className="px-4 sm:px-6 lg:px-8 pb-24">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<<<<<<< HEAD
               {filteredProducts.map((product, index) => (
                 <ProductCard 
                   key={product.id} 
                   product={product} 
-=======
               {filteredAndSortedProducts.map((product, index) => (
                 <ProductCard
                   key={product.id}
                   product={product}
->>>>>>> 7c268fc (Initial commit)
                   index={index}
                   isVisible={isVisible}
                   isLiked={likedProducts.has(product.id)}
@@ -272,11 +234,9 @@ interface ProductCardProps {
     reviews: number;
     image: string;
     category: string;
-<<<<<<< HEAD
+
     badge?: string;
-=======
     badge?: string; // Ensure badge is included in the ProductCardProps
->>>>>>> 7c268fc (Initial commit)
   };
   index: number;
   isVisible: boolean;
@@ -284,10 +244,7 @@ interface ProductCardProps {
   onToggleLike: () => void;
   onAddToCart: () => void;
 }
-
-<<<<<<< HEAD
 const ProductCard = ({ product, index, isVisible, isLiked, onToggleLike, onAddToCart }: ProductCardProps) => {
-=======
 const ProductCard = ({
   product,
   index,
@@ -295,18 +252,12 @@ const ProductCard = ({
   isLiked,
   onToggleLike,
   onAddToCart,
-}: ProductCardProps) => {
->>>>>>> 7c268fc (Initial commit)
-  const [isAdding, setIsAdding] = useState(false);
+}: ProductCardProps) => {  const [isAdding, setIsAdding] = useState(false);
 
   const handleAddToCart = async () => {
     setIsAdding(true);
     onAddToCart();
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 7c268fc (Initial commit)
     // Reset animation after delay
     setTimeout(() => {
       setIsAdding(false);
@@ -314,7 +265,6 @@ const ProductCard = ({
   };
 
   return (
-<<<<<<< HEAD
     <div 
       className={`group glass-card overflow-hidden hover:transform hover:scale-105 transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -350,7 +300,6 @@ const ProductCard = ({
           />
         </button>
 
-=======
     <div
       // Apply the translucent card effect here
       className={`group bg-black/30 backdrop-blur-md shadow-xl rounded-xl overflow-hidden
@@ -386,7 +335,6 @@ const ProductCard = ({
             }`}
           />
         </button>
->>>>>>> 7c268fc (Initial commit)
         {/* Quick View Overlay */}
         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
           <Link to={`/products/${product.id}`}>
@@ -396,19 +344,14 @@ const ProductCard = ({
           </Link>
         </div>
       </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 7c268fc (Initial commit)
+
       {/* Content */}
       <div className="p-6">
         <h3 className="text-xl font-playfair font-semibold text-white mb-2">
           {product.name}
         </h3>
-<<<<<<< HEAD
-        
-=======
->>>>>>> 7c268fc (Initial commit)
+
         {/* Rating */}
         <div className="flex items-center space-x-2 mb-3">
           <div className="flex items-center">
@@ -423,16 +366,15 @@ const ProductCard = ({
               />
             ))}
           </div>
-<<<<<<< HEAD
+
           <span className="text-blue-200 text-sm font-inter">({product.reviews})</span>
         </div>
 
-=======
+
           <span className="text-blue-200 text-sm font-inter">
             ({product.reviews})
           </span>
         </div>
->>>>>>> 7c268fc (Initial commit)
         {/* Price */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
@@ -445,7 +387,7 @@ const ProductCard = ({
               </span>
             )}
           </div>
-<<<<<<< HEAD
+
           <button 
             onClick={handleAddToCart}
             className={`w-10 h-10 ocean-gradient rounded-full flex items-center justify-center hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 ${
@@ -455,7 +397,7 @@ const ProductCard = ({
             <ShoppingCart className={`h-5 w-5 text-white transition-transform duration-300 ${
               isAdding ? 'animate-bounce' : ''
             }`} />
-=======
+
           <button
             onClick={handleAddToCart}
             className={`w-10 h-10 ocean-gradient rounded-full flex items-center justify-center hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 ${
@@ -467,7 +409,6 @@ const ProductCard = ({
                 isAdding ? "animate-bounce" : ""
               }`}
             />
->>>>>>> 7c268fc (Initial commit)
           </button>
         </div>
       </div>
@@ -475,8 +416,6 @@ const ProductCard = ({
   );
 };
 
-<<<<<<< HEAD
 export default Products;
-=======
+
 export default Products;
->>>>>>> 7c268fc (Initial commit)
