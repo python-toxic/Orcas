@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Star, Heart, ShoppingCart, Plus, Minus } from "lucide-react";
@@ -194,7 +193,6 @@ const ProductDetail = () => {
         </div>
 
         <Footer />
-=======
 import { useParams, Link } from "react-router-dom";
 import { products } from "@/data/products";
 import { Star, ShoppingCart, ChevronLeft, Heart } from "lucide-react";
@@ -343,14 +341,13 @@ const ProductDetails = () => {
             )}
           </div>
         </div>
->>>>>>> 7c268fc (Initial commit)
+
       </div>
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default ProductDetail;
-=======
+
 export default ProductDetails;
->>>>>>> 7c268fc (Initial commit)
+
