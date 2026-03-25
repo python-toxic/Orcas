@@ -81,7 +81,7 @@ const Footer = () => {
 };
 
 interface SocialButtonProps {
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 const SocialButton = ({ icon: Icon }: SocialButtonProps) => {

@@ -1,4 +1,3 @@
-
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Star, Heart, ShoppingCart, Plus, Minus } from "lucide-react";
 import { useState } from "react";
@@ -38,7 +37,7 @@ const ProductDetail = () => {
       {/* Ocean Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-deep-900 via-ocean-800 to-deep-950" />
-        <div 
+        <div
           className="absolute inset-0 opacity-60"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1518877593221-1f28583780b4?auto=format&fit=crop&w=2000&q=80')`,
@@ -53,7 +52,7 @@ const ProductDetail = () => {
       {/* Content */}
       <div className="relative z-10">
         <Navbar />
-        
+
         <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {/* Back Button */}
@@ -193,161 +192,9 @@ const ProductDetail = () => {
         </div>
 
         <Footer />
-import { useParams, Link } from "react-router-dom";
-import { products } from "@/data/products";
-import { Star, ShoppingCart, ChevronLeft, Heart } from "lucide-react";
-import { useCart } from "@/contexts/CartContext";
-import { useToast } from "@/hooks/use-toast";
-import { useEffect, useState } from "react"; // Import useState here
-
-const ProductDetails = () => {
-  const { id } = useParams<{ id: string }>();
-  const product = products.find((p) => p.id === Number(id));
-  const { addToCart } = useCart();
-  const { toast } = useToast();
-
-  const [isVisible, setIsVisible] = useState(false); // Add isVisible state
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setIsVisible(true); // Set isVisible to true on component mount
-  }, []);
-
-  if (!product)
-    return <div className="text-white p-10">Product not found.</div>;
-
-  return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative px-4 py-20"
-      style={{
-        backgroundImage: `url(${product.backgroundImage})`,
-      }}
-    >
-      {/* Dimmed blurred background overlay */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-md z-0" />
-
-      {/* Back button */}
-      <Link
-        to="/products"
-        className={`absolute top-6 left-6 text-white flex items-center space-x-1 z-20 transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
-      >
-        <ChevronLeft className="w-5 h-5" />
-        <span className="text-sm font-medium">Back to Products</span>
-      </Link>
-
-      {/* Product Card - Apply the new translucent and shadow styles here */}
-      <div
-        className={`z-10 relative bg-black/30 backdrop-blur-md shadow-xl
-                   rounded-xl max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8
-                   p-8 md:p-10 text-white
-                   transition-all duration-1000 delay-300 ${ // Added delay for sequential animation
-                     isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                   }`}
-      >
-        {/* Product Image */}
-        <div className="w-full rounded-2xl overflow-hidden">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover rounded-2xl"
-          />
-        </div>
-
-        {/* Product Info */}
-        <div className="flex flex-col justify-between space-y-6">
-          <div>
-            {/* Display badge if available, otherwise hide the span */}
-            {product.badge && (
-              <span className="inline-block text-xs font-semibold bg-white/20 text-white px-2 py-1 rounded-full mb-2">
-                {product.badge}
-              </span>
-            )}
-            <h1 className="text-3xl font-semibold font-playfair mb-2">
-              {product.name}
-            </h1>
-
-            {/* Rating */}
-            <div className="flex items-center text-sm space-x-2 mb-4">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`h-4 w-4 ${
-                    i < Math.floor(product.rating)
-                      ? "text-yellow-400 fill-current"
-                      : "text-gray-500"
-                  }`}
-                />
-              ))}
-              <span className="text-sm text-blue-200">
-                {product.rating} ({product.reviews} reviews)
-              </span>
-            </div>
-
-            {/* Description */}
-            <p className="text-blue-100 mb-4 text-sm">{product.description}</p>
-
-            {/* Features List */}
-            <ul className="list-disc pl-5 text-blue-100 space-y-1 text-sm">
-              {product.features.map((feature, index) => (
-                <li key={index} className="flex items-start space-x-2">
-                  <span className="text-green-300">•</span>{" "}
-                  {/* Green bullet point */}
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Price + Actions */}
-          <div className="flex flex-col space-y-4">
-            <div className="flex items-center space-x-4">
-              <span className="text-2xl font-bold text-white">
-                ${product.price}
-              </span>
-              {product.originalPrice && (
-                <span className="line-through text-gray-400 text-sm">
-                  ${product.originalPrice}
-                </span>
-              )}
-            </div>
-
-            <div className="flex space-x-2 items-center">
-              <button
-                onClick={() => {
-                  addToCart(product);
-                  toast({
-                    title: "Added to cart!",
-                    description: `${product.name} was added to your cart.`,
-                  });
-                }}
-                className="bg-gradient-to-r from-sky-500 to-blue-600 text-white px-6 py-2 rounded-full font-medium flex items-center space-x-2 hover:scale-105 transition-all"
-              >
-                <ShoppingCart className="w-4 h-4" />
-                <span>Add to Cart</span>
-              </button>
-
-              <button className="bg-white/10 border border-white/20 text-white p-2 rounded-full hover:scale-105 transition-all">
-                <Heart className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* In Stock message based on product.inStock */}
-            {product.inStock ? (
-              <div className="text-green-300 text-sm">✓ In Stock</div>
-            ) : (
-              <div className="text-red-400 text-sm">✗ Out of Stock</div>
-            )}
-          </div>
-        </div>
-
       </div>
     </div>
   );
 };
 
 export default ProductDetail;
-
-export default ProductDetails;
-

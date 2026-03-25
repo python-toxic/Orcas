@@ -56,7 +56,7 @@ const Navbar = () => {
 };
 
 interface NavButtonProps {
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   text: string;
   to: string;
   isActive?: boolean;

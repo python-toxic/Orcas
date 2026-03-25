@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
-import { products } from "@/data/products";
+import { products, type Product } from "@/data/products";
 
 const Products = () => {
   const [likedProducts, setLikedProducts] = useState<Set<number>>(new Set());
@@ -23,7 +23,7 @@ const Products = () => {
     });
   };
 
-  const handleAddToCart = (product: any) => {
+  const handleAddToCart = (product: Product) => {
     addToCart({
       id: product.id,
       name: product.name,

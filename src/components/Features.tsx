@@ -51,7 +51,7 @@ const Features = () => {
 };
 
 interface FeatureCardProps {
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
 }
